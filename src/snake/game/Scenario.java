@@ -1,7 +1,9 @@
 package snake.game;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Scenario {
@@ -20,5 +22,10 @@ public class Scenario {
         this.snake = snake;
         
         root.getChildren().add(snake.getHead());
-    }   
+    }
+    
+    public void setKeyPressed(EventHandler<? super KeyEvent> action) {
+        this.scene.setOnKeyPressed(action);
+    }
+    
 }

@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="snake-game.jar" size="3986" download="eager" />
+    <jar href="snake-game.jar" size="6058" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="800" height="600" main-class="snake.game.SnakeGame"  name="snake-game" />
+  <jfx:javafx-desc  width="800" height="600" main-class="snake.game.Game"  name="snake-game" />
   <update check="always"/>
 </jnlp>
