@@ -10,6 +10,7 @@ public class EventLoop {
     private Scenario scenario;
     private KeyCode currentDirection;
     private Snake snake;
+    private Timeline timeline = new Timeline();
     
     public EventLoop(Scenario scenario, Snake snake) {
         this.scenario = scenario;
@@ -38,8 +39,8 @@ public class EventLoop {
         startLoop();
     }
     
-    private void startLoop() {
-        Timeline timeline = new Timeline();
+    public void startLoop() {
+        //Timeline timeline = new Timeline();
         KeyFrame keyFrame = new KeyFrame(Duration.millis(200), e -> {
             Integer positionX = snake.getPositionX();
             Integer positionY = snake.getPositionY();
@@ -60,14 +61,29 @@ public class EventLoop {
                 positionY = positionY + Config.SQUARE_SIZE;
             }
             
-            this.snake.setPosition(positionX, positionY);
+            
+            if (positionX < 0 ||
+                positionX > Config.WIDTH - Config.SQUARE_SIZE ||
+                positionY < 0 ||
+                positionY > Config.HEIGHT - Config.SQUARE_SIZE) {
+                gameOver();
+                
+            } else {
+                this.snake.setPosition(positionX, positionY);
+            }
+            
             
         });
         
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(Integer.MAX_VALUE);
-        timeline.play();
+        this.timeline.getKeyFrames().add(keyFrame);
+        this.timeline.setCycleCount(Integer.MAX_VALUE);
+        this.timeline.play();
         
+    }
+    
+    public void gameOver() {
+        this.timeline.stop();
+        this.scenario.showGameOver(this);
     }
     
 }

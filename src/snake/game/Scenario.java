@@ -28,4 +28,18 @@ public class Scenario {
         this.scene.setOnKeyPressed(action);
     }
     
+    public void showGameOver(EventLoop eventLoop) {
+        TryAgainButton tryAgainButton = new TryAgainButton(e -> {
+            clean();
+            this.root.getChildren().add(this.snake.reset());
+            eventLoop.startLoop();
+        });
+        
+        this.root.getChildren().add(tryAgainButton);
+    }
+    
+    private void clean() {
+        this.root.getChildren().remove(0, this.root.getChildren().size());
+    }
+    
 }

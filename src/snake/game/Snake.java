@@ -13,6 +13,10 @@ public class Snake {
     
     private void createSnake() {
         this.head = CanvasUtils.buildSquare(Color.BLUE);
+        resetPosition();
+    }
+    
+    private void resetPosition() {
         this.head.setTranslateX(Config.WIDTH / 2 - Config.SQUARE_SIZE);
         this.head.setTranslateY(Config.HEIGHT / 2 - Config.SQUARE_SIZE);
     }
@@ -32,6 +36,11 @@ public class Snake {
     public void setPosition(Integer x, Integer y) {
         this.head.setTranslateX(x);
         this.head.setTranslateY(y);
+    }
+    
+    public Canvas reset() {
+        resetPosition();
+        return this.head;
     }
      
 }
