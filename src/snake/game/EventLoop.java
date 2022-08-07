@@ -83,6 +83,8 @@ public class EventLoop {
     
     public void gameOver() {
         this.timeline.stop();
+        this.currentDirection = null;
+        this.snake.die();
         this.scenario.showGameOver(this);
     }
     

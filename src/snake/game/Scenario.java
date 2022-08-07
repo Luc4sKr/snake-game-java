@@ -12,7 +12,7 @@ public class Scenario {
     private Group root = new Group();
     private Snake snake;
     
-    public Scenario(Stage primaryStage, Snake snake) {
+    public Scenario(Stage primaryStage, Snake snake, Food food) {
         this.scene = new Scene(root, Config.WIDTH, Config.HEIGHT);
         
         primaryStage.setScene(scene);
@@ -22,6 +22,7 @@ public class Scenario {
         this.snake = snake;
         
         root.getChildren().add(snake.getHead());
+        root.getChildren().add(food.getFood());
     }
     
     public void setKeyPressed(EventHandler<? super KeyEvent> action) {
