@@ -10,7 +10,7 @@ public class EventLoop {
     private Scenario scenario;
     private KeyCode currentDirection;
     private Snake snake;
-    private Timeline timeline = new Timeline();
+    private Timeline timeline;
     private Food food;
     
     public EventLoop(Scenario scenario, Snake snake, Food food) {
@@ -20,19 +20,19 @@ public class EventLoop {
         this.scenario.setKeyPressed(e -> {
             KeyCode keyPressed = e.getCode();
             
-            if (keyPressed.equals(KeyCode.RIGHT)) {
+            if(keyPressed.equals(KeyCode.RIGHT) && !KeyCode.LEFT.equals(currentDirection)){
                 currentDirection = keyPressed;
             }
-            
-            if (keyPressed.equals(KeyCode.LEFT)) {
+
+            if(keyPressed.equals(KeyCode.LEFT)&& !KeyCode.RIGHT.equals(currentDirection)){
                 currentDirection = keyPressed;
             }
-            
-            if (keyPressed.equals(KeyCode.UP)) {
+
+            if(keyPressed.equals(KeyCode.UP) && !KeyCode.DOWN.equals(currentDirection)){
                 currentDirection = keyPressed;
             }
-            
-            if (keyPressed.equals(KeyCode.DOWN)) {
+
+            if(keyPressed.equals(KeyCode.DOWN)&& !KeyCode.UP.equals(currentDirection)){
                 currentDirection = keyPressed;
             }
             
@@ -42,10 +42,10 @@ public class EventLoop {
     }
     
     public void startLoop() {
-        //Timeline timeline = new Timeline();
+        this.timeline = new Timeline();
         KeyFrame keyFrame = new KeyFrame(Duration.millis(200), e -> {
-            Integer positionX = snake.getPositionX();
-            Integer positionY = snake.getPositionY();
+            Integer positionX = this.snake.getPositionX();
+            Integer positionY = this.snake.getPositionY();
             
             if (KeyCode.RIGHT.equals(currentDirection)) {
                 positionX = positionX + Config.SQUARE_SIZE;
@@ -67,7 +67,8 @@ public class EventLoop {
             if (positionX < 0 ||
                 positionX > Config.WIDTH - Config.SQUARE_SIZE ||
                 positionY < 0 ||
-                positionY > Config.HEIGHT - Config.SQUARE_SIZE) {
+                positionY > Config.HEIGHT - Config.SQUARE_SIZE ||
+                this.snake.checkCollision(positionX, positionY)) {
                 gameOver();
                 
             } else {

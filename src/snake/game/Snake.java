@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Snake {
     
@@ -49,23 +50,30 @@ public class Snake {
             bodyPart.setTranslateY((position[1]));
         }
         
-        this.positionHistory.add(new Integer[] {x, y});
+        this.positionHistory.add(new Integer[]{x, y});
         
-        if(positionHistory.size() > body.size() + 1) {
+        if(positionHistory.size() > (body.size() + 1)) {
             positionHistory.remove(0);
         }
     }
     
     public Canvas reset() {
         resetPosition();
+        changeColor(Color.GREEN);
+        this.positionHistory.clear();
+        this.body.clear();
         return this.head;
     }
     
-    public void die() {
+    private void changeColor(Paint color) {
         GraphicsContext gc = this.getHead().getGraphicsContext2D();
         gc.clearRect(0, 0, Config.SQUARE_SIZE, Config.SQUARE_SIZE);
-        gc.setFill(Color.RED);
+        gc.setFill(color);
         gc.fillRect(0, 0, Config.SQUARE_SIZE, Config.SQUARE_SIZE);
+    }
+    
+    public void die() {
+        changeColor(Color.RED);
     }
     
     public void eat(Scenario scenario) {
@@ -74,5 +82,16 @@ public class Snake {
         this.body.add(bodyPart);
     }
      
+    public boolean checkCollision(Integer x, Integer y) {
+        for(Canvas bodyPart: this.body) {
+            Integer bodyPositionX = (int)bodyPart.getTranslateX();
+            Integer bodyPositionY = (int)bodyPart.getTranslateY();
+            
+            if(x.equals(bodyPositionX) && y.equals(bodyPositionY)) {
+                return true;
+            }    
+        }
+        return false;
+    }
 }
 

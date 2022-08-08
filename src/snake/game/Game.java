@@ -14,6 +14,6 @@ public class Game extends Application {
         Snake snake = new Snake();
         Food food = new Food();
         Scenario scenario = new Scenario(primaryStage, snake, food);
-        new EventLoop(scenario, snake, food);
+        EventLoop eventLoop = new EventLoop(scenario, snake, food);
     }
 }

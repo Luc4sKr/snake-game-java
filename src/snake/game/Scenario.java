@@ -12,6 +12,7 @@ public class Scenario {
     private Scene scene;
     private Group root = new Group();
     private Snake snake;
+    private Food food;
     
     public Scenario(Stage primaryStage, Snake snake, Food food) {
         this.scene = new Scene(root, Config.WIDTH, Config.HEIGHT);
@@ -21,6 +22,7 @@ public class Scenario {
         primaryStage.show();
         
         this.snake = snake;
+        this.food = food;
         
         root.getChildren().add(snake.getHead());
         root.getChildren().add(food.getFood());
@@ -33,7 +35,8 @@ public class Scenario {
     public void showGameOver(EventLoop eventLoop) {
         TryAgainButton tryAgainButton = new TryAgainButton(e -> {
             clean();
-            this.root.getChildren().add(this.snake.reset());
+            add(this.snake.reset());
+            add(this.food.getFood());
             eventLoop.startLoop();
         });
         
