@@ -11,10 +11,12 @@ public class EventLoop {
     private KeyCode currentDirection;
     private Snake snake;
     private Timeline timeline = new Timeline();
+    private Food food;
     
-    public EventLoop(Scenario scenario, Snake snake) {
+    public EventLoop(Scenario scenario, Snake snake, Food food) {
         this.scenario = scenario;
         this.snake = snake;
+        this.food = food;
         this.scenario.setKeyPressed(e -> {
             KeyCode keyPressed = e.getCode();
             
@@ -69,6 +71,11 @@ public class EventLoop {
                 gameOver();
                 
             } else {
+                
+                if (positionX.equals(food.getPositionX()) && positionY.equals(food.getPositionY())) {
+                    food.setRandomPosition();
+                }
+                    
                 this.snake.setPosition(positionX, positionY);
             }
             

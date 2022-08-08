@@ -47,7 +47,7 @@ public class Snake {
     public void die() {
         GraphicsContext gc = this.getHead().getGraphicsContext2D();
         gc.clearRect(0, 0, Config.SQUARE_SIZE, Config.SQUARE_SIZE);
-        gc.setFill(Color.CRIMSON);
+        gc.setFill(Color.RED);
         gc.fillRect(0, 0, Config.SQUARE_SIZE, Config.SQUARE_SIZE);
     }
      
