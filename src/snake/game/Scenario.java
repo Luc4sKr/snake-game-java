@@ -2,6 +2,7 @@ package snake.game;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -41,6 +42,10 @@ public class Scenario {
     
     private void clean() {
         this.root.getChildren().remove(0, this.root.getChildren().size());
+    }
+    
+    public void add(Node node) {
+        this.root.getChildren().add(node);
     }
     
 }

@@ -72,8 +72,9 @@ public class EventLoop {
                 
             } else {
                 
-                if (positionX.equals(food.getPositionX()) && positionY.equals(food.getPositionY())) {
-                    food.setRandomPosition();
+                if (positionX.equals(this.food.getPositionX()) && positionY.equals(this.food.getPositionY())) {
+                    this.food.setRandomPosition();
+                    this.snake.eat(this.scenario);
                 }
                     
                 this.snake.setPosition(positionX, positionY);
